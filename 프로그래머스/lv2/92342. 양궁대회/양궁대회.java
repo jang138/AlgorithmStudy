@@ -5,11 +5,11 @@ class Solution {
     int n,max;
     
      // 가장 낮은점수를 많이 맞춘 경우가 우선
-    Queue<int[]> answer = new PriorityQueue<>(((o1, o2) -> {    
+    Queue<int[]> answer = new PriorityQueue<>((o1, o2) -> {    
         for (int i = 10; i >= 0; i--)
             if (o1[i] != o2[i]) return o2[i] - o1[i];
         return 0;
-    }));
+    });
 
     
     public int[] solution(int n, int[] info) {
