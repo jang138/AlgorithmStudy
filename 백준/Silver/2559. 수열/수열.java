@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -17,10 +16,13 @@ public class Main {
 			S[i] = S[i-1] + Integer.parseInt(st.nextToken());
 		}
 		
+		// ∑ (x=0 to K-1) a[i+x] = S[i+K-1] - S[i-1]
+		
 		int max = Integer.MIN_VALUE;
 		for (int i = 1; i <= N - K + 1; i++) {
 			max = Math.max(max, S[i + K - 1] - S[i - 1]);
 		}
+		
 		
 		System.out.println(max);
 	}
