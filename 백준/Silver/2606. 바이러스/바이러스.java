@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
@@ -32,8 +31,8 @@ public class Main {
 //			System.out.println(a + " " + b);
 		}
 
-		dfs(1);
-//		bfs(1);
+//		dfs(1);
+		bfs(1);
 
 		System.out.println(infection);
 
