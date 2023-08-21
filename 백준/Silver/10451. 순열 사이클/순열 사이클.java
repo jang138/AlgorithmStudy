@@ -37,8 +37,8 @@ public class Main {
 			for (int i = 1; i <= N; i++) {
 				if (!visit[i]) {
 					count++;
-					//dfs(i);
-					bfs(i);
+					dfs(i);
+					//bfs(i);
 				}
 			}
 
