@@ -1,75 +1,62 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	static ArrayList<Integer>[] A;
-	static boolean visit[];
+	static int N, M;
+	static boolean check[];
+	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		A = new ArrayList[N + 1];
-		visit = new boolean[N + 1];
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
 
+		check = new boolean[N + 1];
 		for (int i = 0; i <= N; i++) {
-			A[i] = new ArrayList<Integer>();
+			graph.add(new ArrayList<>());
 		}
 
-		for (int i = 0; i < M; i++) {
+		for (int m = 0; m < M; m++) {
 			st = new StringTokenizer(br.readLine());
-			int s = Integer.parseInt(st.nextToken());
-			int e = Integer.parseInt(st.nextToken());
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
 
-			// 양방향 에지
-			A[s].add(e);
-			A[e].add(s);
+			graph.get(u).add(v);
+			graph.get(v).add(u);
 		}
 
-//		for (int i = 1; i <= N; i++) {
-//			System.out.print(i + " => ");
-//			for (int j = 0; j < A[i].size(); j++) {
-//				System.out.print(A[i].get(j) + " ");
-//			}
-//			System.out.println();
-//		}
-
-//		for (int i = 1; i <= N; i++) {
-//			System.out.print(i + " => ");
-//			for (int j : A[i]) {
-//				System.out.print(j + " ");
-//			}
-//			System.out.println();
-//		}
-
-		int cnt = 0;
-
+		int ans = 0;
 		for (int i = 1; i <= N; i++) {
-			if (!visit[i]) {
-				cnt++;
-				dfs(i);
+//			System.out.println(check[i]);
+			if (!check[i]) {
+				ans++;
+				bfs(i);
 			}
 		}
 
-		System.out.println(cnt);
+		System.out.println(ans);
 	}
 
-	private static void dfs(int v) {
-		if (visit[v]) {
-			return;
-		}
+	private static void bfs(int num) {
+		Queue<Integer> queue = new LinkedList<>();
+		queue.add(num);
+		check[num] = true;
 
-		visit[v] = true;
+		while (!queue.isEmpty()) {
+			int now = queue.poll();
 
-		for (int i : A[v]) {
-			if (visit[i] == false) {
-				dfs(i);
+			for (int node : graph.get(now)) {
+				if (!check[node]) {
+					queue.add(node);
+					check[node] = true;
+				}
 			}
 		}
 	}
