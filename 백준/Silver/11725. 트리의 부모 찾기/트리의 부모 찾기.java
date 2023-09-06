@@ -33,7 +33,7 @@ public class Main {
 			graph.get(y).add(x);
 		}
 
-		bfs(1);
+		dfs(1);
 
 		for (int i = 2; i <= N; i++) {
 			sb.append(parentNode[i]).append("\n");
@@ -42,21 +42,14 @@ public class Main {
 		System.out.println(sb.toString());
 	}
 
-	private static void bfs(int n) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.add(n);
+	private static void dfs(int n) {
 		visit[n] = true;
-		parentNode[n] = -1;
 
-		while (!queue.isEmpty()) {
-			int now = queue.poll();
-
-			for (int node : graph.get(now)) {
-				if (!visit[node]) {
-					queue.add(node);
-					visit[node] = true;
-					parentNode[node] = now;
-				}
+		for (int node : graph.get(n)) {
+			if (!visit[node]) {
+				visit[node] = true;
+				parentNode[node] = n;
+				dfs(node);
 			}
 		}
 	}
