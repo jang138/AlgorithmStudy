@@ -4,4 +4,4 @@ SELECT  ANIMAL_ID, NAME,
             then 'O'
         else 'X'
         end as '중성화'
-from ANIMAL_INS 
+from ANIMAL_INS
