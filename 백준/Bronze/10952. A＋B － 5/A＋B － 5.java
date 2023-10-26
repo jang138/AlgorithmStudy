@@ -7,22 +7,19 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
 
 		while (true) {
-			String str = br.readLine();
-			st = new StringTokenizer(str);
-
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-
-			if (a == 0 && b == 0) {
+			st = new StringTokenizer(br.readLine());
+			int A = Integer.parseInt(st.nextToken());
+			int B = Integer.parseInt(st.nextToken());
+			if (A == 0 && B == 0) {
 				break;
 			}
-
-			System.out.println(a + b);
-
+			sb.append(A + B).append("\n");
 		}
 
+		System.out.println(sb);
 	}
 
 }
