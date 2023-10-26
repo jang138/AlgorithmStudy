@@ -4,23 +4,22 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringTokenizer st;
+		int N = Integer.parseInt(br.readLine());
+		int max = Integer.MIN_VALUE;
+		int min = Integer.MAX_VALUE;
 
-		int N  = Integer.parseInt(st.nextToken());
-		int minVal = Integer.MAX_VALUE;
-		int maxVal = Integer.MIN_VALUE;
-		
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
-			int a = Integer.parseInt(st.nextToken());
-			
-			minVal = Math.min(minVal, a);
-			maxVal = Math.max(maxVal, a);
+			int target = Integer.parseInt(st.nextToken());
+			max = Math.max(max, target);
+			min = Math.min(min, target);
 		}
-		
-		System.out.println(minVal + " " + maxVal);
+
+		System.out.println(min + " " + max);
+
 	}
 
 }
