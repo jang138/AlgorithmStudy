@@ -2,9 +2,9 @@ import java.util.*;
 
 class Solution {
     public int solution(int bridge_length, int weight, int[] truck_weights) {
-        int sec = 0;
-        int bridge_weight = 0;
-        Queue<Integer> bridge = new LinkedList<>();
+        int sec = 0;            // 시간
+        int bridge_weight = 0;  // 다리의 현재 무게
+        Queue<Integer> bridge = new LinkedList<>(); // 다리에 오른 트럭을 담는 큐
                 
         for(int t : truck_weights){            
             while(true){
