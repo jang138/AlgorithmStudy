@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Solution {
-    static int count = 0;
+    int count = 0;
     
     public int solution(int[] numbers, int target) {
         dfs(0, 0, numbers, target);
