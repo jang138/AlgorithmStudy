@@ -5,13 +5,22 @@ class Solution {
     int m;
     int[] dx = {0,1,0,-1};
     int[] dy = {1,0,-1,0};
+    // int[][] draw;
     
     public int solution(int[][] maps) {
         n = maps.length;
         m = maps[0].length;
         boolean[][] visited = new boolean[n][m];
+        // draw = new int[n][m];
         
         int answer = bfs(maps, visited);
+        
+        // for(int i = 0; i < n; i++){
+        //     for(int j = 0; j < m; j++){
+        //         System.out.printf("%-3d", draw[i][j]);
+        //     }
+        //     System.out.println();
+        // }
     
         return answer;
     }
@@ -23,6 +32,7 @@ class Solution {
         
         while(!queue.isEmpty()){
             int[] now = queue.poll();
+            // draw[now[0]][now[1]] = now[2];
             
             if(now[0] == (n-1) && now[1] == (m-1)){
                 return now[2];
