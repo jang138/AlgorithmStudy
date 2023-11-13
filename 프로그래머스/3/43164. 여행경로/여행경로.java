@@ -15,7 +15,7 @@ class Solution {
         return answer;
     }
     
-     static void dfs(int depth, String now, String path, String[][] tickets){
+     public void dfs(int depth, String now, String path, String[][] tickets){
          if(depth == tickets.length){
              arrayList.add(path);
              return;
