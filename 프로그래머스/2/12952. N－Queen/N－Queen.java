@@ -1,28 +1,33 @@
+import java.util.*;
+
 class Solution {
+    static int N;
     static int[] board;
     static int count = 0;
     
     public int solution(int n) {
         board = new int[n];
+        N = n;
         
-        backTracking(0, n);
+        backTracking(0);
         
         return count;
     }
     
-    public void backTracking(int depth, int n){
-        if(depth == n){
+    public void backTracking(int depth){
+        if(depth == N){
             count++;
             return;
         }
         
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < N; i++){
             board[depth] = i;
             
             if(queen(depth)){
-                backTracking(depth + 1, n);
+                backTracking(depth + 1);
             }
         }
+        
     }
     
     public boolean queen(int d){
