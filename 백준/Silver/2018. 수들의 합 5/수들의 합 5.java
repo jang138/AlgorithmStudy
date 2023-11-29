@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Main {
@@ -8,25 +7,26 @@ public class Main {
 		int N = sc.nextInt();
 
 		int cnt = 1;
-		int left = 1;
-		int right = 1;
+		int start = 1;
+		int end = 1;
 		int sum = 1;
 
-		while (right != N) {
-			if (sum == N) {
-				cnt++;
-				right++;
-				sum += right;
+		while (end != N) {
+			if (sum < N) {
+				end++;
+				sum += end;
 			} else if (sum > N) {
-				sum -= left;
-				left++;
+				sum -= start;
+				start++;
 			} else {
-				right++;
-				sum += right;
+				cnt++;
+				end++;
+				sum += end;
 			}
 		}
-		
+
 		System.out.println(cnt);
+
 	}
 
 }
