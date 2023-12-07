@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -10,34 +9,36 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		int M = Integer.parseInt(br.readLine());
-		int input[] = new int[N];
+		int numbers[] = new int[N];
 
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
-			input[i] = Integer.parseInt(st.nextToken());
+			numbers[i] = Integer.parseInt(st.nextToken());
 		}
 
-		Arrays.sort(input);
+		Arrays.sort(numbers);
 
+//		System.out.println(Arrays.toString(numbers));
+
+		int start = 0;
+		int end = N - 1;
+		int sum = 0;
 		int cnt = 0;
-		int left = 0;
-		int right = N - 1;
 
-		while (left < right) {
-			int sum = input[left] + input[right];
-
-			if (sum < M) {
-				left++;
-			} else if (sum > M) {
-				right--;
+		while (start < end) {
+			sum = numbers[start] + numbers[end];
+			
+			if(sum < M) {
+				start++;
+			} else if(sum > M) {
+				end--;
 			} else {
 				cnt++;
-				left++;
-				right--;
+				start++;
 			}
 		}
-
-		 System.out.println(cnt);
+		
+		System.out.println(cnt);
 	}
 
 }
