@@ -1,28 +1,24 @@
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		
-		Queue<Integer> queue = new LinkedList<>();
-		for(int i = 1; i <=N; i++) {
-			queue.add(i);
+		Deque<Integer> dq = new LinkedList<>();
+		for (int i = 1; i <= N; i++) {
+			dq.addLast(i);
 		}
 		
-		while(queue.size() > 1) {
-			// 1. 맨 위 카드를 버린다.
-			queue.poll();
+		while(dq.size() > 1) {
+			dq.pollFirst();
 			
-			// 2. 다음 맨 위 카드는 맨 아래로 넣는다.
-			int bottom = queue.poll();
-			queue.add(bottom);
+			int goBottom = dq.pollFirst();
+			dq.addLast(goBottom);
 		}
 		
-		System.out.println(queue.poll());
+		System.out.println(dq.poll());
 	}
-
 }
