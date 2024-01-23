@@ -11,13 +11,15 @@ class Solution {
             
             int length = j - i + 1;
             int[] subArray = new int[length];
+            int[] copyArray = Arrays.copyOfRange(array, i - 1, j);
             for(int a = 0; a < length; a++){
                 subArray[a] = array[a + i - 1];
             }
             
             Arrays.sort(subArray);
+            Arrays.sort(copyArray);
             
-            answer[n] = subArray[k - 1];
+            answer[n] = copyArray[k - 1];
         }
         return answer;
     }
