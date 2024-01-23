@@ -6,11 +6,11 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	static int dx[] = { 1, 0, -1, 0 };
-	static int dy[] = { 0, 1, 0, -1 };
-	static int map[][];
-	static boolean visit[][];
 	static int N, M;
+	static int[][] map;
+	static boolean[][] visited;
+	static int dx[] = { 0, 1, 0, -1 };
+	static int dy[] = { 1, 0, -1, 0 };
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,48 +19,43 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		map = new int[N][M];
-		visit = new boolean[N][M];
+		visited = new boolean[N][M];
 
 		for (int i = 0; i < N; i++) {
-			String line = br.readLine();
-
+			String str = br.readLine();
 			for (int j = 0; j < M; j++) {
-				map[i][j] = line.charAt(j) - '0';
-				// System.out.print(map[i][j]);
+				map[i][j] = str.charAt(j) - '0';
 			}
-			// System.out.println();
 		}
 
 		bfs(0, 0);
+
 		System.out.println(map[N - 1][M - 1]);
 	}
 
-	static void bfs(int i, int j) {
+	public static void bfs(int x, int y) {
 		Queue<int[]> queue = new LinkedList<>();
-		queue.add(new int[] { i, j });
+		queue.add(new int[] { x, y });
+		visited[x][y] = true;
 
 		while (!queue.isEmpty()) {
-			int now[] = queue.poll();
-			visit[i][j] = true;
+			int[] node = queue.poll();
 
 			for (int d = 0; d < 4; d++) {
-				int x = now[0] + dx[d];
-				int y = now[1] + dy[d];
+				int nx = node[0] + dx[d];
+				int ny = node[1] + dy[d];
 
-				if (x < 0 || y < 0 || x >= N || y >= M) {
+				if (nx < 0 || nx >= N || ny < 0 || ny >= M || visited[nx][ny])
 					continue;
-				}
 
-				if (visit[x][y] || map[x][y] == 0) {
+				if (map[nx][ny] == 0)
 					continue;
-				}
 
-				queue.add(new int[] { x, y });
-				map[x][y] = map[now[0]][now[1]] + 1;
-				visit[x][y] = true;
+				visited[nx][ny] = true;
+				map[nx][ny] = map[node[0]][node[1]] + 1;
+				queue.add(new int[] { nx, ny });
+
 			}
 		}
-
 	}
-
 }
