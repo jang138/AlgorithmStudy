@@ -1,29 +1,26 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
 
 	static int N, M;
-	static boolean check[];
 	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+	static boolean[] visit;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
+		visit = new boolean[N + 1];
 
-		check = new boolean[N + 1];
 		for (int i = 0; i <= N; i++) {
 			graph.add(new ArrayList<>());
 		}
 
-		for (int m = 0; m < M; m++) {
+		for (int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
 			int u = Integer.parseInt(st.nextToken());
 			int v = Integer.parseInt(st.nextToken());
@@ -32,33 +29,25 @@ public class Main {
 			graph.get(v).add(u);
 		}
 
-		int ans = 0;
+		int cnt = 0;
 		for (int i = 1; i <= N; i++) {
-//			System.out.println(check[i]);
-			if (!check[i]) {
-				ans++;
-				bfs(i);
+			if (!visit[i]) {
+				visit[i] = true;
+				dfs(i);
+				cnt++;
 			}
 		}
+		
+		System.out.println(cnt);
 
-		System.out.println(ans);
 	}
-
-	private static void bfs(int num) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.add(num);
-		check[num] = true;
-
-		while (!queue.isEmpty()) {
-			int now = queue.poll();
-
-			for (int node : graph.get(now)) {
-				if (!check[node]) {
-					queue.add(node);
-					check[node] = true;
-				}
+	
+	public static void dfs(int i) {
+		for (int index : graph.get(i)) {
+			if(!visit[index]) {
+				visit[index] = true;
+				dfs(index);
 			}
 		}
 	}
-
 }
