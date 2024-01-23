@@ -1,63 +1,63 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	static ArrayList<Integer>[] A;
-	static boolean visit[];
-	static boolean flag;
+	static int N, M;
+	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+	static boolean[] visited;
+	static boolean flag = false;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
 
-		A = new ArrayList[N];
-		visit = new boolean[N];
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+
+		visited = new boolean[N];
 		for (int i = 0; i < N; i++) {
-			A[i] = new ArrayList<Integer>();
+			graph.add(new ArrayList<>());
 		}
 
 		for (int i = 0; i < M; i++) {
 			st = new StringTokenizer(br.readLine());
-			int s = Integer.parseInt(st.nextToken());
-			int e = Integer.parseInt(st.nextToken());
-			A[s].add(e);
-			A[e].add(s);
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+
+			graph.get(a).add(b);
+			graph.get(b).add(a);
 		}
 
 		for (int i = 0; i < N; i++) {
 			dfs(i, 1);
 
-			if (flag) {
+			if (flag)
 				break;
-			}
 		}
-		
+
 		System.out.println(flag ? 1 : 0);
 
 	}
 
-	private static void dfs(int n, int depth) {
+	public static void dfs(int number, int depth) {
 		if (depth == 5 || flag) {
 			flag = true;
 			return;
 		}
-		
-		visit[n] = true;
-		
-		for (int i : A[n]) {
-			if(!visit[i]) {
-				dfs(i, depth + 1);
+
+		visited[number] = true;
+
+		for (int target : graph.get(number)) {
+			if (!visited[target]) {
+				dfs(target, depth + 1);
 			}
 		}
-		
-		// 탐색이 끝날 때 다시 false로 바꿔준다.
-		visit[n] = false;
+
+		visited[number] = false;
 	}
 
 }
