@@ -7,14 +7,16 @@ public class Main {
 
 	static int N, M;
 	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-	static boolean[] visit;
+	static boolean[] visited;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String args[]) throws Exception {
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
+
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
-		visit = new boolean[N + 1];
+		visited = new boolean[N + 1];
 
 		for (int i = 0; i <= N; i++) {
 			graph.add(new ArrayList<>());
@@ -31,22 +33,23 @@ public class Main {
 
 		int cnt = 0;
 		for (int i = 1; i <= N; i++) {
-			if (!visit[i]) {
-				visit[i] = true;
+			if (!visited[i]) {
 				dfs(i);
 				cnt++;
 			}
+
 		}
 		
 		System.out.println(cnt);
 
 	}
-	
-	public static void dfs(int i) {
-		for (int index : graph.get(i)) {
-			if(!visit[index]) {
-				visit[index] = true;
-				dfs(index);
+
+	public static void dfs(int n) {
+		visited[n] = true;
+		
+		for (int target : graph.get(n)) {
+			if(!visited[target]) {
+				dfs(target);
 			}
 		}
 	}
