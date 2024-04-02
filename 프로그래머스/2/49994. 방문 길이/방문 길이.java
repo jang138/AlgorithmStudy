@@ -1,7 +1,6 @@
 import java.util.*;
 class Solution {
     public int solution(String dirs) {
-int[][] map = new int[11][11];
 		int x = 5;
 		int y = 5;
 		
