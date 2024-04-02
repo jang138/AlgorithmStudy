@@ -1,24 +1,23 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(int N, int[] stages) {
-		int[] stageCount = new int[N + 1];
+		int[] stageCount = new int[N + 2];
 
 		for (int i = 0; i < stages.length; i++) {
-			stageCount[stages[i]-1]++;
+			stageCount[stages[i]]++;
 		}
-
-		System.out.println(Arrays.toString(stageCount));
 
 		HashMap<Integer, Double> map = new HashMap<>();
 		double total = stages.length;
 
-		for (int i = 0; i < N; i++) {
+		for (int i = 1; i <= N; i++) {
 			if (stageCount[i] == 0) {
-				map.put(i+1, 0.0);
+				map.put(i, 0.0);
 				continue;
 			}
 
-			map.put(i+1, stageCount[i] / total);
+			map.put(i, stageCount[i] / total);
 			total -= stageCount[i];
 		}
 
