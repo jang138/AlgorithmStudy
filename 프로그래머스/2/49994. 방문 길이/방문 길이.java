@@ -1,8 +1,8 @@
 import java.util.*;
 class Solution {
     public int solution(String dirs) {
-		int x = 5;
-		int y = 5;
+		int x = 0;
+		int y = 0;
 		
 		HashSet<String> set = new HashSet<>();
 
@@ -30,7 +30,7 @@ class Solution {
 				break;
 			}
 
-			if (nx < 0 || nx >= 11 || ny < 0 || ny >= 11)
+			if (nx <= -6 || nx >= 6 || ny <= -6 || ny >= 6)
 				continue;
 				
 			set.add(String.format("(%d, %d) -> (%d, %d)", x, y, nx, ny));
