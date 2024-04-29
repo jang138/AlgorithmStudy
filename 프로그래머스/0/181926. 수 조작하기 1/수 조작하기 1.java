@@ -1,6 +1,5 @@
 class Solution {
     public int solution(int n, String control) {
-        int answer = 0;
         for(int i = 0; i < control.length(); i++){
             char c = control.charAt(i);
             switch(c){
