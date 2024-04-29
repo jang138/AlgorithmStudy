@@ -10,11 +10,8 @@ public class Main {
 		long A = Long.parseLong(st.nextToken());
 		long B = Long.parseLong(st.nextToken());
 		long C = Long.parseLong(st.nextToken());
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(A + B + C).append("\n");
-
-		System.out.println(sb);
+        
+		System.out.println(A+B+C);
 	}
 
 }
