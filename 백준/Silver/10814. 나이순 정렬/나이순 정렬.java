@@ -26,6 +26,7 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 
+        // priority queue 보다는 person 클래스를 타입으로 가지는 리스트를 정렬하는 것이 더 효율적이다.
 		PriorityQueue<Person> pq = new PriorityQueue<>((p1, p2) -> {
 			if (p1.age == p2.age)
 				return Integer.compare(p1.index, p2.index);
