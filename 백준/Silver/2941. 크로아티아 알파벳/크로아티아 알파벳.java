@@ -11,15 +11,15 @@ public class Main {
 		String[] alphabet = { "c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z=" };
 		int answer = str.length();
 
-		Loop1: for (int i = 0; i < length; i++) {
-			Loop2: for (int j = i + 2; j <= length; j++) {
+		for (int i = 0; i < length; i++) {
+			Loop: for (int j = i + 2; j <= length; j++) {
 				String subStr = str.substring(i, j);
 
 				for (String al : alphabet) {
 					if (al.equals(subStr)) {
 						answer -= subStr.length() - 1;
 						i += al.length() - 1;
-						break Loop2;
+						break Loop;
 					}
 				}
 			}
