@@ -1,17 +1,11 @@
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		Map<Character, Integer> hashmap = new HashMap<>();
-
-		for (int i = 65; i < 91; i++) {
-			hashmap.put((char) i, 0);
-		}
+		int[] cntArray = new int[26];
 
 		String inputStr = sc.next();
 		char[] charArray = inputStr.toCharArray();
@@ -19,26 +13,26 @@ public class Main {
 		for (int i = 0; i < charArray.length; i++) {
 			char target = charArray[i];
 			target = Character.toUpperCase(target);
-			hashmap.put(target, hashmap.get(target) + 1);
+			int targetIndex = target - 65;
+			cntArray[targetIndex]++;
 		}
 
-		int[] countArray = new int[26];
 		int max = -1;
 		char ans = '0';
 
 		for (int i = 65; i < 91; i++) {
 			char target = (char) i;
-			countArray[i - 65] = hashmap.get(target);
+			int cnt = cntArray[i - 65];
 
-			if (max < hashmap.get(target)) {
-				max = hashmap.get(target);
+			if (max < cnt) {
+				max = cnt;
 				ans = target;
 			}
 		}
 
-		Arrays.sort(countArray);
+		Arrays.sort(cntArray);
 
-		if (countArray[24] == countArray[25]) {
+		if (cntArray[24] == cntArray[25]) {
 			System.out.println("?");
 		} else {
 			System.out.println(ans);
