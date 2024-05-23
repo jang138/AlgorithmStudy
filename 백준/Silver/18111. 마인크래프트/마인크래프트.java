@@ -30,7 +30,7 @@ public class Main {
 		}
 
 		int minSec = Integer.MAX_VALUE;
-		int high = -1;
+		int high = 0;
 
 		for (int standardHigh = minHigh; standardHigh <= maxHigh; standardHigh++) {
 			int itemB = B;
@@ -75,10 +75,6 @@ public class Main {
 			if (itemB < 0)
 				break;
 
-			if (sec == 0) {
-				minSec = 0;
-				continue;
-			}
 
 			if (minSec >= sec) {
 				minSec = sec;
@@ -86,13 +82,6 @@ public class Main {
 			}
 		}
 
-		if (minSec == Integer.MAX_VALUE) {
-			minSec = 0;
-		}
-
-		if (high == -1) {
-			high = maxHigh;
-		}
 
 		System.out.println(minSec + " " + high);
 
