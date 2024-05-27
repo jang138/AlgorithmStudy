@@ -4,6 +4,7 @@ class Solution {
         int[] indexes = {1, 2, 3};
         for(int i = 1; i < 4; i++ ){
             double line = (dots[0][0]-dots[i][0])/(double)(dots[0][1]-dots[i][1]);
+            System.out.println(line);
             int i2 = 0; int i3 = 0;
             for(int j : indexes){
                 if(j != i){
@@ -15,7 +16,8 @@ class Solution {
                 }
             }
             double line2 = (dots[i2][0] - dots[i3][0]) / (double)(dots[i2][1]-dots[i3][1]);
-            
+                        System.out.println(line2);
+
             if (line == line2) return 1;
         }
         return 0;
