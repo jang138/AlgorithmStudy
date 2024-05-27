@@ -16,7 +16,9 @@ class Solution {
                 }
             }
             double line2 = (dots[i2][0] - dots[i3][0]) / (double)(dots[i2][1]-dots[i3][1]);
-                        System.out.println(line2);
+            System.out.println(line2);
+            
+            System.out.println("==========");
 
             if (line == line2) return 1;
         }
