@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 public class Main {
 
 	static boolean[][] board;
-	static int min = 64;
+	static int min = Integer.MAX_VALUE;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,6 +19,7 @@ public class Main {
 			String line = br.readLine();
 
 			for (int j = 0; j < M; j++) {
+				// 흰색의 경우 true, 검은색의 경우 false
 				if (line.charAt(j) == 'W') {
 					board[i][j] = true;
 				} else {
@@ -28,27 +29,28 @@ public class Main {
 			}
 		}
 
-		int N_row = N - 7;
-		int M_col = M - 7;
+		int r = N - 7;
+		int c = M - 7;
 
-		for (int i = 0; i < N_row; i++) {
-			for (int j = 0; j < M_col; j++) {
-				find(i, j);
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+				check(i, j);
 			}
 		}
 
 		System.out.println(min);
 	}
 
-	public static void find(int x, int y) {
-		int end_x = x + 8;
-		int end_y = y + 8;
+	public static void check(int x, int y) {
+		int endx = x + 8;
+		int endy = y + 8;
 		int count = 0;
 
+		// 체스판의 첫번째 칸
 		boolean first = board[x][y];
 
-		for (int i = x; i < end_x; i++) {
-			for (int j = y; j < end_y; j++) {
+		for (int i = x; i < endx; i++) {
+			for (int j = y; j < endy; j++) {
 
 				if (board[i][j] != first) {
 					count++;
