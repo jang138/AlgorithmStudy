@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -9,49 +8,44 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-//		if (N <= 2) {
-//			System.out.println(0);
-//			return;
-//		}
-
-		long numbers[] = new long[N];
+		int[] array = new int[N];
 
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
-			numbers[i] = Long.parseLong(st.nextToken());
+			array[i] = Integer.parseInt(st.nextToken());
 		}
 
-		Arrays.sort(numbers);
-
-		int cnt = 0;
-
+		Arrays.sort(array);
+		int ans = 0;
 		for (int i = 0; i < N; i++) {
-			long target = numbers[i];
+			int target = array[i];
 			int start = 0;
 			int end = N - 1;
-			long sum = 0;
 
 			while (start < end) {
-				sum = numbers[start] + numbers[end];
+				int sum = array[start] + array[end];
 
-				if (sum < target) {
-					start++;
-				} else if (sum > target) {
-					end--;
-				} else {
+				if (target == sum) {
 					if (start != i && end != i) {
-						cnt++;
+						ans++;
 						break;
 					} else if (start == i) {
 						start++;
-					} else if (end == i) {
+					} else {
+						end--;
+					}
+				} else {
+					if (target > sum) {
+						start++;
+					} else if (target < sum) {
 						end--;
 					}
 				}
 			}
+
 		}
 
-		System.out.println(cnt);
+		System.out.println(ans);
 
 	}
 
