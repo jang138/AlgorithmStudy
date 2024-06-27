@@ -1,61 +1,51 @@
 import java.util.*;
 
 class Solution {
-    int n;
-    int m;
-    int[] dx = {0,1,0,-1};
-    int[] dy = {1,0,-1,0};
-    // int[][] draw;
+	int[] dx = { 1, 0, -1, 0 };
+	int[] dy = { 0, 1, 0, -1 };
+
+	class Node {
+		int x, y;
+
+		public Node(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
     
     public int solution(int[][] maps) {
-        n = maps.length;
-        m = maps[0].length;
-        boolean[][] visited = new boolean[n][m];
-        // draw = new int[n][m];
-        
-        int answer = bfs(maps, visited);
-        
-        // for(int i = 0; i < n; i++){
-        //     for(int j = 0; j < m; j++){
-        //         System.out.printf("%-3d", draw[i][j]);
-        //     }
-        //     System.out.println();
-        // }
-    
-        return answer;
-    }
-    
-    public int bfs(int[][] maps, boolean[][] visited){
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[] {0, 0, 1});
-        visited[0][0] = true;
-        
-        while(!queue.isEmpty()){
-            int[] now = queue.poll();
-            // draw[now[0]][now[1]] = now[2];
-            
-            if(now[0] == (n-1) && now[1] == (m-1)){
-                return now[2];
-            }
-            
-            for(int d = 0; d < 4; d++){
-                int nx = now[0] + dx[d];
-                int ny = now[1] + dy[d];
-                
-                if(nx < 0 || ny < 0 || nx >= n || ny >= m){
-                    continue;
-                }
-                
-                if(maps[nx][ny] == 0 || visited[nx][ny]){
-                    continue;
-                }
-                
-                queue.offer(new int[] {nx, ny, now[2] + 1});
-                visited[nx][ny] = true;
-                
-            }
-        }
-        
-        return -1;
+        int n = maps.length;
+		int m = maps[0].length;
+		int[][] dist = new int[n][m];
+
+		ArrayDeque<Node> queue = new ArrayDeque<>();
+		queue.add(new Node(0, 0));
+		dist[0][0] = 1;
+
+		while (!queue.isEmpty()) {
+			Node node = queue.poll();
+
+			for (int d = 0; d < 4; d++) {
+				int nx = node.x + dx[d];
+				int ny = node.y + dy[d];
+
+				if (nx < 0 || ny < 0 || nx >= n || ny >= m)
+					continue;
+
+				if (maps[nx][ny] == 0)
+					continue;
+
+				if (dist[nx][ny] == 0) {
+					queue.add(new Node(nx, ny));
+					dist[nx][ny] = dist[node.x][node.y] + 1;
+				}
+			}
+		}
+
+		if (dist[n - 1][m - 1] == 0) {
+			return -1;
+		} else {
+			return dist[n - 1][m - 1];
+		}
     }
 }
