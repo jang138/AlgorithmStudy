@@ -12,9 +12,7 @@ public class Main {
 		StringTokenizer st;
 
 		int N = Integer.parseInt(br.readLine());
-		boolean[] visit = new boolean[N + 1];
 		int[] root = new int[N + 1];
-		root[1] = 1;
 
 		ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 		for (int i = 0; i <= N; i++) {
@@ -29,18 +27,17 @@ public class Main {
 			graph.get(u).add(v);
 			graph.get(v).add(u);
 		}
-
+		
 		Queue<Integer> queue = new LinkedList<>();
 		queue.add(1);
-		visit[1] = true;
+		root[1] = 1;
 
 		while (!queue.isEmpty()) {
 			int target = queue.poll();
 
 			for (int node : graph.get(target)) {
-				if (!visit[node]) {
+				if (root[node] == 0) {
 					queue.add(node);
-					visit[node] = true;
 					root[node] = target;
 				}
 			}
