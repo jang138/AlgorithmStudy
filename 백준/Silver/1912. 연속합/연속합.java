@@ -7,18 +7,18 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-		int[] input = new int[N + 1];
-		int[] dp = new int[N + 1];
+		int[] input = new int[N];
+		int[] dp = new int[N];
 
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 1; i <= N; i++) {
+		for (int i = 0; i < N; i++) {
 			input[i] = Integer.parseInt(st.nextToken());
-			dp[i] = Math.max(dp[i - 1] + input[i], input[i]);
 		}
 		
-		dp[1] = input[1];
-		int max = input[1];
+		dp[0] = input[0];
+		int max = input[0];
 		for (int i = 1; i < dp.length; i++) {
+			dp[i] = Math.max(dp[i - 1] + input[i], input[i]);
 			max = Math.max(max, dp[i]);
 		}
 		
