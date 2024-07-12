@@ -1,18 +1,16 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
 
 	static int N, M, V;
 	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
-	static boolean[] visited;
-	static StringBuilder sb = new StringBuilder();
+	static boolean[] visit;
+	static StringBuilder sb;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +20,6 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 		V = Integer.parseInt(st.nextToken());
 
-		visited = new boolean[N + 1];
 		for (int i = 0; i <= N; i++) {
 			graph.add(new ArrayList<>());
 		}
@@ -36,43 +33,46 @@ public class Main {
 			graph.get(v).add(u);
 		}
 		
-		for (ArrayList<Integer> arrayList : graph) {
-			Collections.sort(arrayList);
+		for (int i = 1; i <= N; i++) {
+			Collections.sort(graph.get(i));
 		}
 
+		visit = new boolean[N + 1];
+		sb = new StringBuilder();
 		dfs(V);
-		System.out.println(sb);
-		Arrays.fill(visited, false);
-		sb.setLength(0);
+
+		visit = new boolean[N + 1];
+		sb.append("\n");
 		bfs(V);
-		System.out.println(sb);
+		
+		System.out.println(sb.toString());
 	}
 
-	public static void dfs(int n) {
-		visited[n] = true;
-		sb.append(n).append(" ");
-
-		for (int target : graph.get(n)) {
-			if (!visited[target]) {
-				visited[target] = true;
-				dfs(target);
+	private static void dfs(int node) {
+		visit[node] = true;
+		sb.append(node).append(" ");
+		
+		for (int number : graph.get(node)) {
+			if(!visit[number]) {
+				dfs(number);
 			}
 		}
 	}
 
-	public static void bfs(int n) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.add(n);
-		visited[n] = true;
-
-		while (!queue.isEmpty()) {
-			int node = queue.poll();
-			sb.append(node).append(" ");
+	private static void bfs(int node) {
+		visit[node] = true;
+		
+		ArrayDeque<Integer> queue = new ArrayDeque<>();
+		queue.add(node);
+		
+		while(!queue.isEmpty()) {
+			int target = queue.poll();
+			sb.append(target).append(" ");
 			
-			for (int target : graph.get(node)) {
-				if (!visited[target]) {
-					visited[target] = true;
-					queue.add(target);
+			for (int number : graph.get(target)) {
+				if(!visit[number]) {
+					visit[number] = true;
+					queue.add(number);
 				}
 			}
 		}
