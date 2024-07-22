@@ -8,7 +8,6 @@ public class Main {
 		String str = sc.next();
 
 		ArrayDeque<Character> stack = new ArrayDeque<>();
-		int bar = 0;
 		int cnt = 0;
 
 		for (int i = 0; i < str.length(); i++) {
