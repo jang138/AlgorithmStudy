@@ -5,13 +5,15 @@ import java.util.StringTokenizer;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
-		int T = Integer.parseInt(br.readLine());
+
+		int N = Integer.parseInt(br.readLine());
 		boolean[][] paper = new boolean[101][101];
-		int size = 0;
-		
-		for (int t = 0; t < T; t++) {
+		int cnt = 0;
+
+		for (int n = 0; n < N; n++) {
 			st = new StringTokenizer(br.readLine());
 			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
@@ -20,13 +22,14 @@ public class Main {
 				for (int j = y; j < y + 10; j++) {
 					if(!paper[i][j]) {
 						paper[i][j] = true;
-						size++;
+						cnt++;
 					}
 				}
 			}
 		}
 		
-		System.out.println(size);
+		System.out.println(cnt);
+
 	}
 
 }
