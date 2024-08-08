@@ -1,11 +1,13 @@
 class Solution {
     public int solution(int balls, int share) {
+        if (share > balls - share) {
+            share = balls - share;
+        }
+
         long answer = 1;
-        int cnt = 1;
-        for(int i = share + 1; i <= balls; i++){
-            answer *= i;
-            answer /= cnt;
-            cnt++;
+        for (int i = 0; i < share; i++) {
+            answer *= (balls - i);
+            answer /= (i + 1);
         }
         
         return (int) answer;
