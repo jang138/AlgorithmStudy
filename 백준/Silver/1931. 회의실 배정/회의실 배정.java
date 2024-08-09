@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -10,31 +12,38 @@ public class Main {
 		StringTokenizer st;
 
 		int N = Integer.parseInt(br.readLine());
-		int[][] time = new int[N][2];
+		List<int[]> list = new ArrayList<>();
 
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
-			time[i][0] = Integer.parseInt(st.nextToken());
-			time[i][1] = Integer.parseInt(st.nextToken());
-		}
+			int s = Integer.parseInt(st.nextToken());
+			int e = Integer.parseInt(st.nextToken());
 
-		Arrays.sort(time, (o1, o2) -> {
-			if (o1[1] == o2[1])
-				return Integer.compare(o1[0], o2[0]);
-			return Integer.compare(o1[1], o2[1]);
+			list.add(new int[] { s, e });
+		}
+		
+		Collections.sort(list, (l1, l2) -> {
+			if(l1[1] == l2[1])
+				return Integer.compare(l1[0], l2[0]);
+			
+			return Integer.compare(l1[1], l2[1]);
 		});
 
-		int count = 0;
-		int end = 0;
-
-		for (int i = 0; i < N; i++) {
-			if (end <= time[i][0]) {
-				end = time[i][1];
-				count++;
+		
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.println(Arrays.toString(list.get(i)));
+//		}
+		
+		int cnt = 0;
+		int endTime = 0;
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i)[0] >= endTime) {
+				cnt++;
+				endTime = list.get(i)[1];
 			}
 		}
 		
-		System.out.println(count);
+		System.out.println(cnt);
 	}
 
 }
