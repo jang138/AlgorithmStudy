@@ -1,15 +1,11 @@
 class Solution {
     public int solution(int n) {
-        int l = 1;
-        int count = 0;
-        int fact = 1;
+        int fac = 1;
+        int count = 1;
         
-        while(fact <= n){
-            l++;
-            fact *= l;
-            count++;
-        }
+        while(fac <= n)
+            fac *= ++count;
         
-        return count;
+        return count - 1;
     }
 }
